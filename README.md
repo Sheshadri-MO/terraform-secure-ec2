@@ -1,10 +1,10 @@
-# Terraform AWS EC2 Secure Web Nodes (Hardened Setup)
+#  Terraform AWS EC2 Secure Web Nodes (Hardened Setup)
 
 ##  Project Overview
 
 This project demonstrates provisioning of secure EC2 instances on AWS using Terraform with automated hardening.
 
-The infrastructure is designed with a **security-first approach**, enforcing strict access control and eliminating unnecessary privileges.
+The infrastructure follows a **security-first approach**, ensuring strict access control and eliminating unnecessary privileges.
 
 ---
 
@@ -18,7 +18,7 @@ The infrastructure is designed with a **security-first approach**, enforcing str
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
 * Terraform
 * AWS EC2 (Amazon Linux 2023)
@@ -27,12 +27,14 @@ The infrastructure is designed with a **security-first approach**, enforcing str
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 .
 ├── main.tf
 ├── outputs.tf
+├── screenshots/
+│   └── ssh-proof.png
 ├── README.md
 ├── .gitignore
 ```
@@ -48,7 +50,7 @@ The infrastructure is designed with a **security-first approach**, enforcing str
 
 ---
 
-##  Infrastructure Details
+## Infrastructure Details
 
 ### EC2 Configuration
 
@@ -59,7 +61,7 @@ The infrastructure is designed with a **security-first approach**, enforcing str
 
 ---
 
-##  Deployment Steps
+## Deployment Steps
 
 ### 1. Initialize Terraform
 
@@ -81,7 +83,7 @@ terraform apply
 
 ---
 
-##  Output Example
+## Output Example
 
 ```
 public_ips = [
@@ -94,7 +96,7 @@ public_ips = [
 
 ##  SSH Access
 
-### Fix Key Permissions (Important)
+### Fix Key Permissions
 
 ```
 chmod 400 ~/Downloads/nac.pem
@@ -108,7 +110,19 @@ ssh -i ~/Downloads/nac.pem devops@<public-ip>
 
 ---
 
-##  Security Validation
+
+
+![SSH Proof](https://raw.githubusercontent.com/Sheshadri-MO/terraform-secure-ec2/main/screenshots/ssh-proof.png)
+
+ This screenshot demonstrates:
+
+* Successful login using `devops` user
+* Root login disabled
+* No sudo access (restricted privileges)
+
+---
+
+## Security Validation
 
 ### 1. Confirm user
 
@@ -116,7 +130,7 @@ ssh -i ~/Downloads/nac.pem devops@<public-ip>
 whoami
 ```
 
-Expected output:
+Expected:
 
 ```
 devops
@@ -142,9 +156,9 @@ devops is not in the sudoers file
 
 ---
 
-##  Common Issues & Fixes
+## Common Issues & Fixes
 
-###  Permission denied (SSH)
+### Permission denied (SSH)
 
 ```
 chmod 400 nac.pem
@@ -162,15 +176,3 @@ terraform apply
 ```
 
 ---
-
-##  Key Learnings
-
-* Infrastructure as Code using Terraform
-* Secure EC2 provisioning
-* SSH hardening techniques
-* Cloud-init automation
-* Principle of Least Privilege
-
----
-
-
